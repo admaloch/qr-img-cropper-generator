@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Cropper.js</title>
+  <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./qr.css">
+
+</head>
+
+<body>
+  <div class="container main-container">
+<div class="row">
+  <h1>Qr Image Generator</h1>
+</div>
+    <div class="qr-section">
+
+      <div id="qr-container">
+        <div id="qr-image"></div>
+        <div class="qr-bg-color"></div>
+      </div>
+
+      <div class="qr-settings">
+        <h2>Qr Settings</h2>
+        <div class="qr-location">
+          <label for="qr-url-input">QR Url:</label>
+          <input type="text" id="qr-url-input" name="qr-url-input" required minlength="4" />
+        </div>
+        <div class="size-input">
+          <label for="volume">Size: </label>
+          <input type="range" id="qr-size" name="size" value="280" step="1" min="125" max="450" />
+          <div class="size-indicator">250px</div>
+        </div>
+        <div class="color-input">
+
+          <label for="Background Color">
+            Background Color:
+          </label>
+
+          <input type="color" class="color_swatch custom-color-input" id="qr-color-input"
+            title="Choose Background Color" value="#14213d" colorpick-eyedropper-active="true">
+          <i data-toggle="tooltip" title="Match border color" class="fa-solid fa-link link-border"></i>
+
+          <!-- <p class="hexVal" id="bg_hexVal">#ffffff</p> -->
+
+        </div>
+        <div class="border-settings">
+          <span class="border-style">Add Border:</span>
+          <button id="border-toggle" type="button" class="btn btn-sm btn-toggle active" data-toggle="button"
+            aria-pressed="true" autocomplete="off">
+            <div class="handle"></div>
+          </button>
+          <div class="border-item-settings">
+            <div class=" border-item">
+              <label for="Border Color ">
+                Border Color:
+              </label>
+              <input type="color" class="color_swatch custom-color-input" id="qr-border-input"
+                title="Choose Border Color" value="#14213d" colorpick-eyedropper-active="true">
+              <i data-toggle="tooltip" title="Match Background color" class="fa-solid fa-link link-background"></i>
+              <!-- <p class="hexVal" id="bg_hexVal">#ffffff</p> -->
+            </div>
+            <div class="border-style border-item">
+              <label for="border-style">Border Style:</label>
+
+              <select name="style" id="border-style">
+                <option selected value="solid">solid</option>
+                <option value="double">double</option>
+                <option value="dotted">dotted</option>
+                <option value="dashed">dashed</option>
+                <option value="groove">groove</option>
+                <option value="ridge">ridge</option>
+                <option value="inset">inset</option>
+                <option value="outset">outset</option>
+              </select>
+            </div>
+            <div class="size-input border-item">
+              <label for="volume">Border Size:</label>
+              <input type="range" id="border-size-input" name="border-size" value="10" step="1" min="5" max="35" />
+            </div>
+            <div class="border-radius border-item">
+              <label for="volume">Border Radius:</label>
+              <input type="range" id="border-radius-input" name="border-radius" value="10" step="1" min="0" max="50" />
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="main-img col-md-9">
+      <div class="img-section-title">
+        <h2 class="text-center">Image Settings</h2>
+      </div>
+      <div class="img-settings">
+        <div class="docs-buttons">
+
+
+          <button type="button" class="settings-icon" data-method="zoom" data-option="-0.1" title="Zoom Out">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Zoom Out">
+              <i class="fa-solid fa-circle-minus"></i> </span>
+          </button>
+          <button type="button" class="settings-icon" data-method="zoom" data-option="0.1" title="Zoom In">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Zoom In">
+              <i class="fa-solid fa-circle-plus"></i>
+            </span>
+          </button>
+
+
+
+          <button type="button" class="settings-icon" data-method="move" data-option="10" data-second-option="0"
+            title="Move Left">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Move left">
+              <i class="fa-solid fa-hand-point-left"></i>
+            </span>
+          </button>
+          <button type="button" class="settings-icon" data-method="move" data-option="-10" data-second-option="0"
+            title="Move Right">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Move Right">
+              <i class="fa-solid fa-hand-point-right"></i>
+            </span>
+          </button>
+          <button type="button" class="settings-icon" data-method="move" data-option="0" data-second-option="10"
+            title="Move Up">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Move Up">
+              <i class="fa-solid fa-hand-point-up"></i>
+            </span>
+          </button>
+          <button type="button" class="settings-icon" data-method="move" data-option="0" data-second-option="-10"
+            title="Move Down">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Move Down">
+              <i class="fa-solid fa-hand-point-down"></i>
+            </span>
+          </button>
+
+
+
+          <button type="button" class="settings-icon" data-method="rotate" data-option="-45" title="Rotate Left">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Rotate Left">
+              <i class="fa-solid fa-arrow-rotate-left"></i> </span>
+          </button>
+          <button type="button" class="settings-icon" data-method="rotate" data-option="45" title="Rotate Right">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Rotate Right">
+              <i class="fa-solid fa-arrow-rotate-right"></i> </span>
+          </button>
+
+
+
+          <button type="button" class="settings-icon" data-method="scaleX" data-option="-1" title="Flip Horizontal">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Horizontal Flip">
+              <i class="fa-solid fa-left-right"></i> </span>
+          </button>
+          <button type="button" class="settings-icon" data-method="scaleY" data-option="-1" title="Flip Vertical">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Vertical Flip">
+              <i class="fa-solid fa-up-down"></i> </span>
+          </button>
+
+
+
+
+
+
+
+          <button type="button" class="settings-icon" data-method="reset" title="Reset">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Reset Crop">
+              <i class="fa-solid fa-arrows-rotate"></i> </span>
+          </button>
+
+
+          <label type="button" class="settings-icon upload-photo-icon" for="inputImage" title="Upload image file">
+            <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Upload New Image">
+              <i class="fa-solid fa-upload"></i>
+            </span>
+          </label>
+
+
+          <!-- <label class=" btn-upload" for="inputImage" title="Upload image file">
+            <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+
+            <span>Upload New Image</span>
+            <span class="fa fa-icon-style fa-upload upload-icon"></span>
+
+          </label> -->
+
+
+
+
+
+          <div class=" -crop hide-crop-btn">
+            <button type="button" class="settings-icon" data-method="getCroppedCanvas">
+              <span id="gen-cropped-img" class="docs-tooltip settings-icon-container">
+                Get Cropped Canvas
+              </span>
+            </button>
+
+          </div>
+
+
+
+          <!-- Show the cropped image in modal -->
+
+        </div><!-- /.docs-buttons -->
+
+      </div>
+
+      <!-- <h3 class="page-header">Demo:</h3> -->
+      <div class="img-container">
+        <img id="image" src="WHC25059.JPG" alt="Picture">
+      </div>
+    </div>
+    <!-- <label class=" btn-upload" for="inputImage" title="Upload image file">
+      <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+
+      <span>Upload New Image</span>
+      <span class="fa fa-icon-style fa-upload upload-icon"></span>
+
+    </label> -->
+  </div>
+
+
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>
+  <script src="./script.js"></script>
+
+</body>
+
+</html>
