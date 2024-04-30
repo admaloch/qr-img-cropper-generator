@@ -1,4 +1,4 @@
-#QR-IMG generator
+# Cropper.js
 
-Currently in the works
+A Pen created on CodePen.io. Original URL: [https://codepen.io/admaloch/pen/BaEMPMK](https://codepen.io/admaloch/pen/BaEMPMK).
 
