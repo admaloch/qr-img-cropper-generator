@@ -63,11 +63,16 @@ resetFilterItems.forEach(item => {
     })
 })
 
-const resetAllFilters = document.querySelector('#reset-all-filters')
-resetAllFilters.addEventListener('click', () => {
+const resetAllQrFilters = () => {
     resetFilterItems.forEach(item => {
         item.click()
     })
+}
+
+const resetAllFilters = document.querySelector('#reset-all-filters')
+resetAllFilters.addEventListener('click', () => {
+    resetAllQrFilters()
 })
+
 
 

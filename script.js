@@ -278,31 +278,44 @@ $(function () {
 		$inputImage.prop('disabled', true).parent().addClass('disabled');
 	}
 
-	// let imgSrc = cropper.getCroppedCanvas({
-	// 	width: img_w.value // input value
-	// }).toDataURL();
 
-	// console.log(options)
 
 });
 
 
 
 
-// save on click
-// document.querySelector('.save').addEventListener('click', (e) => {
-// 	e.preventDefault();
-// 	// get result to data uri
-// 	let imgSrc = cropper.getCroppedCanvas({
-// 		width: img_w.value // input value
-// 	}).toDataURL();
-// 	// remove hide class of img
-// 	cropped.classList.remove('hide');
-// 	img_result.classList.remove('hide');
-// 	// show image cropped
-// 	cropped.src = imgSrc;
-// 	dwn.classList.remove('hide');
-// 	dwn.download = 'imagename.png';
-// 	dwn.setAttribute('href', imgSrc);
-// 	console.log(dwn)
-// });
+const settingsBtns = document.querySelectorAll('.settings-btn')
+settingsBtns.forEach(btn => {
+	btn.addEventListener('click', () => {
+
+		settingsBtns.forEach(button => button.classList.remove('active'))
+		btn.classList.add('active')
+
+		const mainSection = document.querySelector('#main-settings-section')
+		const filterSection = document.querySelector('#filter-settings-section')
+
+		if (btn.id === 'main-settings-btn') {
+			// console.log('it is main')
+			mainSection.style.display = 'block'
+			filterSection.style.display = 'none'
+		} else {
+			console.log('it is filter')
+			mainSection.style.display = 'none'
+			filterSection.style.display = 'block'
+		}
+	})
+})
+
+//reset all qr settings
+const resetAllQrSettings = () => {
+    resetMainEditSection()
+    resetAllQrFilters()
+    document.querySelector('#main-settings-btn').click()
+    document.querySelector('#reset-crop-btn').click()
+    document.querySelector('#qr-url-input').value = ''
+}
+
+document.querySelector('#reset-all-qr').addEventListener('click', () => {
+    resetAllQrSettings()
+})

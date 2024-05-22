@@ -1,17 +1,8 @@
-
-
-
-
-// listener for size
+// listener for main settings range inputs
 const qrImage = document.getElementById('qr-image');
-// const qrSizeInput = document.querySelector('#qr-size')
-// const borderSizeInput = document.querySelector('#border-size-input')
-// const borderRadiusInput = document.querySelector('#border-radius-input')
 const rangeInputs = document.querySelectorAll('.main-settings-range')
-
 rangeInputs.forEach(input => {
     input.addEventListener('input', () => {
-
         const newVal = `${input.value}px`
         updateRangeSetting(input.id, newVal)
         updateRangeText(input, newVal)
@@ -45,63 +36,6 @@ resetRangeItems.forEach(item => {
     })
 })
 
-
-
-
-
-
-
-// qrSizeInput.addEventListener('input', () => {
-//     setQrSize(qrSizeInput.value)
-// });
-
-// const setQrSize = (value) => {
-//     qrImage.style.width = `${value}px`
-//     qrImage.style.height = `${value}px`
-//     updateRangeInputText(qrSizeInput, value)
-// }
-
-// const restoreDefaultQrSize = () => {
-//     setQrSize(qrSizeInput.defaultValue)
-//     qrSizeInput.value = qrSizeInput.defaultValue;
-// }
-
-// document.querySelector('#reset-size').addEventListener('click', () => restoreDefaultQrSize())
-
-// restoreDefaultQrSize()
-
-// //border size input
-
-// borderSizeInput.addEventListener('change', (e) => {
-//     qrImage.style.borderWidth = `${borderSizeInput.value}px`
-// });
-
-// //border radius input
-
-// borderRadiusInput.addEventListener('change', (e) => {
-//     qrImage.style.borderRadius = `${borderRadiusInput.value}px`
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // listener for url input
 let qrUrl;
 const qrUrlInput = document.querySelector('#qr-url-input');
@@ -119,18 +53,20 @@ qrColorVal.addEventListener('input', (e) => {
 
 //add border
 const borderToggle = document.querySelector('#border-toggle')
-const borderItems = document.querySelectorAll('.border-item')
 borderToggle.addEventListener('click', (e) => {
+    checkDisabledBorderItems()
+});
+
+const checkDisabledBorderItems = () => {
+    const borderItems = document.querySelectorAll('.border-item')
     if (borderToggle.classList.contains('active')) {
-        qrImage.style.borderStyle = 'none';
         borderItems.forEach(item => item.classList.add('disable'))
         document.querySelector('.link-border').classList.add('disable')
     } else {
-        qrImage.style.borderStyle = 'solid';
         borderItems.forEach(item => item.classList.remove('disable'))
         document.querySelector('.link-border').classList.remove('disable')
     }
-});
+}
 
 //qr border color
 const qrBorderColor = document.querySelector('#qr-border-input');
@@ -145,8 +81,6 @@ borderStyleSelect.addEventListener('change', (e) => {
     qrImage.style.borderStyle = e.target.value;
     console.log(e.target.value)
 })
-
-
 
 //link background to border color
 const linkBgToBorderIcon = document.querySelector('.link-border')
@@ -164,3 +98,71 @@ linkborderToBgIcon.addEventListener('click', (e) => {
     qrImage.style.borderColor = bgColor;
 });
 
+//reset all main section items
+const resetAllRangeItems = () => {
+    resetRangeItems.forEach(item => {
+        item.click()
+    })
+}
+
+
+
+const resetColorInputs = (itemId) => {
+    const colorInputItem = document.querySelector(itemId);
+    colorInputItem.value = colorInputItem.defaultValue;
+    if (itemId === '#qr-color-input') {
+        qrImage.style.backgroundColor = colorInputItem.defaultValue;
+    } else {
+        qrImage.style.borderColor = colorInputItem.defaultValue;
+    }
+}
+
+const triggerToggle = (buttonId, value) => {
+    const item = document.getElementById(buttonId);
+    if (value === 'true') {
+        item.classList.add('active');
+    } else {
+        item.classList.remove('active');
+    }
+    item.setAttribute('aria-pressed', value);
+    item.dispatchEvent(new Event('change'));
+    const borderItems = document.querySelectorAll('.border-item')
+    borderItems.forEach(item => item.classList.remove('disable'))
+}
+
+
+
+const resetMainEditSection = () => {
+    resetAllRangeItems()
+    resetColorInputs('#qr-color-input');
+    resetColorInputs('#qr-border-input');
+    triggerEventFunc('#border-style', 'solid')
+    triggerToggle('border-toggle', 'true')
+}
+
+document.querySelector('#reset-main-settings').addEventListener('click', () => {
+
+        resetMainEditSection()
+
+
+})
+
+resetMainEditSection()
+
+
+const downloadButton = document.querySelector("#download-qr");
+
+// Add a click event listener to the download button
+downloadButton.addEventListener("click", () => {
+    // Set the background color of html2canvas options to 'transparent'
+    const options = {
+        backgroundColor: "transparent",
+    };
+    // Use html2canvas to capture the contents of the qr-image div as an image
+    html2canvas(qrImage, options).then((canvas) => {
+        // Convert the canvas to a data URL representing a PNG image
+        const dataUrl = canvas.toDataURL("image/png");
+        // Use FileSaver.js to save the data URL as a file
+        saveAs(dataUrl, "qr-image.png");
+    });
+});

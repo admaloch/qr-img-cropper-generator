@@ -19,8 +19,9 @@
 
 <body>
   <div class="container main-container">
-    <div class="row">
+    <div id="heading-container" class="row light-blue-bg">
       <h1>Qr Image Generator</h1>
+      <i id="reset-all-qr" data-toggle="tooltip" title="Reset all Image settings" class="fa-solid fa-arrows-rotate"></i>
     </div>
     <div class="qr-section">
 
@@ -30,10 +31,15 @@
       </div>
 
       <div class="qr-settings">
-        <h2>Qr Settings</h2>
         <div id="settings-items">
-          <button class="active settings-btn" id="main-settings">Main</button>
-          <button class="btn settings-btn" id="filter-settings">Filters</button>
+          <h2>Qr Settings </h2>
+          <button class="active settings-btn light-blue-bg" id="main-settings-btn">Main</button>
+          <button class="settings-btn light-blue-bg" id="filter-settings-btn">Filters</button>
+
+            <i id="download-qr" data-toggle="tooltip" title="Download QR Code"
+              class="fa-solid fa-download"></i>
+
+
         </div>
 
 
@@ -55,7 +61,8 @@
               </div>
               <span>280px</span>
             </div>
-            <input type="range" class="main-settings-range" id="qr-size" name="size" value="280" step="1" min="125" max="450" />
+            <input type="range" class="main-settings-range" id="qr-size" name="size" value="280" step="1" min="125"
+              max="450" />
           </div>
 
 
@@ -72,7 +79,7 @@
             </label>
 
             <input type="color" class="color_swatch custom-color-input" id="qr-color-input"
-              title="Choose Background Color" value="#14213d" colorpick-eyedropper-active="true">
+              title="Choose Background Color" value="#000" colorpick-eyedropper-active="true">
             <i data-toggle="tooltip" title="Match border color" class="fa-solid fa-link link-border"></i>
 
             <!-- <p class="hexVal" id="bg_hexVal">#ffffff</p> -->
@@ -80,11 +87,11 @@
           </div>
           <div class="border-settings">
             <div class="border-toggle">
-               <span class="border-style">Add Border:</span>
-            <button id="border-toggle" type="button" class="btn btn-sm btn-toggle active" data-toggle="button"
-              aria-pressed="true" autocomplete="off">
-              <div class="handle"></div>
-            </button>
+              <span class="border-style">Add Border:</span>
+              <button id="border-toggle" type="button" class="btn btn-sm btn-toggle active" data-toggle="button"
+                aria-pressed="true" autocomplete="off">
+                <div class="handle"></div>
+              </button>
             </div>
 
             <div class="border-item-settings">
@@ -93,7 +100,7 @@
                   Border Color:
                 </label>
                 <input type="color" class="color_swatch custom-color-input" id="qr-border-input"
-                  title="Choose Border Color" value="#14213d" colorpick-eyedropper-active="true">
+                  title="Choose Border Color" value="#000" colorpick-eyedropper-active="true">
                 <i data-toggle="tooltip" title="Match Background color" class="fa-solid fa-link link-background"></i>
                 <!-- <p class="hexVal" id="bg_hexVal">#ffffff</p> -->
               </div>
@@ -112,7 +119,7 @@
                 </select>
               </div>
 
-              <div class="main-range-input">
+              <div class="main-range-input border-item">
                 <div class="range-input-text">
                   <div>
                     <span>Border Size</span>
@@ -121,10 +128,11 @@
                   </div>
                   <span>10px</span>
                 </div>
-                <input type="range" class="main-settings-range" id="border-size-input" name="border-size" value="10" step="1" min="1" max="25" />
+                <input type="range" class="main-settings-range" id="border-size-input" name="border-size" value="10"
+                  step="1" min="1" max="25" />
               </div>
 
-              <div class="main-range-input">
+              <div class="main-range-input border-item">
                 <div class="range-input-text">
                   <div>
                     <span>Border Radius</span>
@@ -133,8 +141,15 @@
                   </div>
                   <span>10px</span>
                 </div>
-                <input type="range" class="main-settings-range" id="border-radius-input" name="border-radius" value="10" step="1" min="0"
-                  max="50" />
+                <input type="range" class="main-settings-range" id="border-radius-input" name="border-radius" value="10"
+                  step="1" min="0" max="50" />
+              </div>
+
+
+              <div class="section-reset">
+                <span>Reset Main Settings</span>
+                <i id="reset-main-settings"
+                  class="fa-solid fa-arrows-rotate reset-main-item"></i>
               </div>
 
 
@@ -243,9 +258,13 @@
             </div>
             <input type="range" class="filter-item-input" id="blur" name="blur" value="0" step="1" min="0" max="20" />
           </div>
-          <div class="reset-btn">
-            <button id="reset-all-filters"><span>Reset filter Settings</span></button>
+
+          <div class="section-reset">
+            <span>Reset Filter Settings</span>
+            <i id="reset-all-filters"
+              class="fa-solid fa-arrows-rotate reset-main-item"></i>
           </div>
+
         </div>
 
 
@@ -253,7 +272,10 @@
       </div>
     </div>
 
-
+    <!-- <div>
+      <button id="trigger-filter-preset">Click me!!!!</button>
+      <select name="pixel-js-select" id="pixel-js-select"></select>
+    </div> -->
 
     <div class="main-img col-md-9">
       <div class="img-section-title">
@@ -328,7 +350,7 @@
 
 
 
-          <button type="button" class="settings-icon" data-method="reset" title="Reset">
+          <button type="button" class="settings-icon" id="reset-crop-btn" data-method="reset" title="Reset">
             <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Reset Crop">
               <i class="fa-solid fa-arrows-rotate"></i> </span>
           </button>
@@ -392,10 +414,17 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>
-  <script src="./script.js"></script>
-  <script src="edit-qr.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <script src="./utility.js"></script>
+
+  <script src="./edit-qr.js"></script>
   <script src="./pixels-edit.js"></script>
-  <script src="edit-filter.js"></script>
+  <script src="./edit-filter.js"></script>
+  <script src="./script.js"></script>
+
+
 
 </body>
 
