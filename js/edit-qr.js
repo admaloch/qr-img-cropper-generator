@@ -150,19 +150,3 @@ document.querySelector('#reset-main-settings').addEventListener('click', () => {
 resetMainEditSection()
 
 
-const downloadButton = document.querySelector("#download-qr");
-
-// Add a click event listener to the download button
-downloadButton.addEventListener("click", () => {
-    // Set the background color of html2canvas options to 'transparent'
-    const options = {
-        backgroundColor: "transparent",
-    };
-    // Use html2canvas to capture the contents of the qr-image div as an image
-    html2canvas(qrImage, options).then((canvas) => {
-        // Convert the canvas to a data URL representing a PNG image
-        const dataUrl = canvas.toDataURL("image/png");
-        // Use FileSaver.js to save the data URL as a file
-        saveAs(dataUrl, "qr-image.png");
-    });
-});
