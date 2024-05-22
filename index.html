@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Cropper.js</title>
+  <title>Qr Image Generator</title>
   <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -12,8 +12,8 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
   <script src="https://cdn.jsdelivr.net/gh/silvia-odwyer/pixels.js/dist/Pixels.js"></script>
 
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./qr.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/qr.css">
 
 </head>
 
@@ -36,8 +36,7 @@
           <button class="active settings-btn light-blue-bg" id="main-settings-btn">Main</button>
           <button class="settings-btn light-blue-bg" id="filter-settings-btn">Filters</button>
 
-            <i id="download-qr" data-toggle="tooltip" title="Download QR Code"
-              class="fa-solid fa-download"></i>
+          <i id="download-qr" data-toggle="tooltip" title="Download QR Code" class="fa-solid fa-download"></i>
 
 
         </div>
@@ -79,7 +78,7 @@
             </label>
 
             <input type="color" class="color_swatch custom-color-input" id="qr-color-input"
-              title="Choose Background Color" value="#000" colorpick-eyedropper-active="true">
+              title="Choose Background Color" value="#020100" colorpick-eyedropper-active="true">
             <i data-toggle="tooltip" title="Match border color" class="fa-solid fa-link link-border"></i>
 
             <!-- <p class="hexVal" id="bg_hexVal">#ffffff</p> -->
@@ -100,7 +99,7 @@
                   Border Color:
                 </label>
                 <input type="color" class="color_swatch custom-color-input" id="qr-border-input"
-                  title="Choose Border Color" value="#000" colorpick-eyedropper-active="true">
+                  title="Choose Border Color" value="#020100" colorpick-eyedropper-active="true">
                 <i data-toggle="tooltip" title="Match Background color" class="fa-solid fa-link link-background"></i>
                 <!-- <p class="hexVal" id="bg_hexVal">#ffffff</p> -->
               </div>
@@ -145,12 +144,13 @@
                   step="1" min="0" max="50" />
               </div>
 
-
-              <div class="section-reset">
-                <span>Reset Main Settings</span>
-                <i id="reset-main-settings"
-                  class="fa-solid fa-arrows-rotate reset-main-item"></i>
+              <div>
+                <span id="reset-main-settings" class="section-reset">
+                  <span>Reset Main Settings</span>
+                  <i class="fa-solid fa-arrows-rotate "></i>
+                </span>
               </div>
+
 
 
 
@@ -258,12 +258,13 @@
             </div>
             <input type="range" class="filter-item-input" id="blur" name="blur" value="0" step="1" min="0" max="20" />
           </div>
-
-          <div class="section-reset">
-            <span>Reset Filter Settings</span>
-            <i id="reset-all-filters"
-              class="fa-solid fa-arrows-rotate reset-main-item"></i>
+          <div>
+            <span id="reset-all-filters" class="section-reset">
+              <span>Reset Filter Settings</span>
+              <i class="fa-solid fa-arrows-rotate "></i>
+            </span>
           </div>
+
 
         </div>
 
@@ -395,7 +396,7 @@
 
       <!-- <h3 class="page-header">Demo:</h3> -->
       <div class="img-container">
-        <img id="image" src="COM06379.JPG" alt="Picture">
+        <img id="image" src="./img/COM06379.JPG" alt="Picture">
       </div>
     </div>
     <!-- <label class=" btn-upload" for="inputImage" title="Upload image file">
@@ -415,14 +416,14 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-  <script src="./utility.js"></script>
+  <script src="./js/utility.js"></script>
 
-  <script src="./edit-qr.js"></script>
-  <script src="./pixels-edit.js"></script>
-  <script src="./edit-filter.js"></script>
-  <script src="./script.js"></script>
+  <script src="./js/edit-qr.js"></script>
+  <!-- <script src="./js/pixels-edit.js"></script> -->
+  <script src="./js/edit-filter.js"></script>
+  <script src="./js/script.js"></script>
 
 
 
