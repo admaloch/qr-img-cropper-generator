@@ -15,3 +15,4 @@ const makeQArt = (urlAddress, img_) => {
 		fillType: 'fill',
 	}).make(document.getElementById('qr-image'));
 }
+

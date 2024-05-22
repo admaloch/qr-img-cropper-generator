@@ -197,6 +197,8 @@ $(function () {
 		}
 	});
 
+	
+
 
 	// Keyboard
 	$(document.body).on('keydown', function (e) {
@@ -234,7 +236,7 @@ $(function () {
 	let $inputImage = $('#inputImage');
 	let URL = window.URL || window.webkitURL;
 	let blobURL;
-
+	console.log($inputImage[0])
 	if (URL) {
 		$inputImage.change(function () {
 			let files = this.files;
