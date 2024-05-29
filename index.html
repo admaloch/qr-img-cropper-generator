@@ -46,6 +46,8 @@
           <div class="qr-location">
             <label for="qr-url-input">QR Url:</label>
             <input type="text" id="qr-url-input" name="qr-url-input" required minlength="4" />
+            <i id="url-error-icon" data-toggle="tooltip" title="URL too long to generate qr code. Consider shortening or using a url shortener" class="fa-solid fa-exclamation-circle link-border"></i>
+
           </div>
 
 
@@ -57,8 +59,13 @@
                 <span>Size</span>
                 <i id="reset-size" data-toggle="tooltip" title="Reset Size"
                   class="fa-solid fa-arrows-rotate reset-main-item"></i>
+                  <select name="size-type" id="size-type">
+                    <option selected value="inches">Inches</option>
+                    <option value="cm">Cm</option>
+                    <option value="px">Px</option>
+                  </select>
               </div>
-              <span>280px</span>
+              <span></span>
             </div>
             <input type="range" class="main-settings-range" id="qr-size" name="size" value="300" step="1" min="200"
               max="700" />

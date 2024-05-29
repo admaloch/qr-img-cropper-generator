@@ -8,26 +8,45 @@ const qrImage = document.getElementById('qr-image');
 const rangeInputs = document.querySelectorAll('.main-settings-range')
 rangeInputs.forEach(input => {
     input.addEventListener('input', () => {
-        const newVal = `${input.value}px`
-        updateRangeSetting(input.id, newVal)
-        updateRangeText(input, newVal)
+        updateRangeSetting(input.id, input.value)
+        updateRangeText(input, input.value)
+
     })
 })
 
 const updateRangeSetting = (id, value) => {
+
     if (id === 'qr-size') {
-        qrImage.style.width = value;
-        qrImage.style.height = value;
+        qrImage.style.width = `${value}px`;
+        qrImage.style.height = `${value}px`;
     } else if (id === 'border-size-input') {
-        qrImage.style.borderWidth = value;
+        qrImage.style.borderWidth = `${value}px`;
     } else {
-        qrImage.style.borderRadius = value;
+        qrImage.style.borderRadius = `${value}px`;
     }
 }
 
+function pxToCM(sizeInPX) {
+    const cmRes = sizeInPX * 2.54 / (96 * window.devicePixelRatio)
+    const roundedRes = Math.round(cmRes * 100) / 100;
+    return cmRes
+};
+
+function pxToInch(sizeInPX) {
+    const inchRes = (pxToCM(sizeInPX) * 0.393701)
+    const roundedRes = Math.round(inchRes * 100) / 100;
+    return roundedRes
+}
+
 const updateRangeText = (item, value) => {
-    const textValLocation = item.previousElementSibling.children[1]
-    textValLocation.innerText = value;
+    const textValLocation = item.previousElementSibling.children[1];
+
+    if (item.id === 'qr-size') {
+        let inchConversion = `${pxToInch(parseInt(value))}"`
+        textValLocation.innerText = inchConversion;
+    } else {
+        textValLocation.innerText = `${parseInt(value)}px`;
+    }
 }
 
 const resetMainRangeBtns = document.querySelectorAll('.reset-main-item');
@@ -42,11 +61,74 @@ resetMainRangeBtns.forEach(item => {
     })
 })
 
+function formatURL(input) {
+    let formattedURL = input.trim(); // Trim whitespace
+
+    // if (input.length > 119) {
+    //     // console.log('input is long', input.length)
+    //     formattedURL = formattedURL.slice(0, 119)
+    // }
+
+    if (!formattedURL.startsWith("http://") && !formattedURL.startsWith("https://")) {
+        formattedURL = "https://" + formattedURL; // Prepend default protocol if missing
+    }
+
+
+    return formattedURL;
+}
+
+const API_KEY = 'sk_78679d2b538f409992feb3a7a16e15be'
+
+async function shortenURL(url) {
+    const inputBody = JSON.stringify({
+        url: url,
+        expiry: '525600m'
+    });
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'x-api-key': API_KEY
+    };
+
+    try {
+        const response = await fetch('https://api.manyapis.com/v1-create-short-url', {
+            method: 'POST',
+            body: inputBody,
+            headers: headers
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            return data.shortUrl;
+        } else {
+            throw new Error(data.error);
+        }
+    } catch (error) {
+        console.error('Error:', error.message);
+        return null;
+    }
+}
+
 // listener for url input
 const qrUrlInput = document.querySelector('#qr-url-input');
-qrUrlInput.addEventListener('input', (e) => {
-    qrUrl = e.target.value;
-    makeQArt(qrUrl, qrImg)
+qrUrlInput.addEventListener('input', async (e) => {
+    let url = e.target.value;
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "https://" + url; // Prepend default protocol if missing
+    }
+    let errorIcon = document.querySelector('#url-error-icon')
+    if (url.length < 119) {
+        errorIcon.style.display = 'none'
+        qrUrlInput.classList.remove('error-shadow')
+        makeQArt(url, qrImg);
+    } else {
+        errorIcon.style.display = 'inline'
+        qrUrlInput.classList.add('error-shadow')
+
+    }
+
 });
 
 //qr color input

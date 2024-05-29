@@ -236,7 +236,7 @@ $(function () {
 	let $inputImage = $('#inputImage');
 	let URL = window.URL || window.webkitURL;
 	let blobURL;
-	console.log($inputImage[0])
+	// console.log($inputImage[0])
 	if (URL) {
 		$inputImage.change(function () {
 			let files = this.files;
@@ -328,7 +328,6 @@ downloadButton.addEventListener("click", () => {
 		const context = tempCanvas.getContext("2d");
 		context.filter = getComputedStyle(qrImage).filter;
 		context.drawImage(img, 0, 0);
-
 		const filteredDataUrl = tempCanvas.toDataURL("image/png");
 		saveAs(filteredDataUrl, "qr-image.png");
 	  };
