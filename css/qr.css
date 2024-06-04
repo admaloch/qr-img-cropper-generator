@@ -142,6 +142,12 @@
     color: var(--white);
 }
 
+#size-input-text {
+    margin: .5rem 0;
+}
+
+
+
 .settings-btn.active {
     background-color: var(--black);
     color: var(--white);
@@ -211,9 +217,7 @@ label {
     font-weight: bold;
 }
 
-.border-style {
-    font-weight: bold;
-}
+
 
 .dropdown-backdrop {
     display: none;
@@ -239,11 +243,13 @@ canvas {
 }
 
 select {
-    border-radius: 5px;
-    padding: .05rem .5rem;
+    border-radius: 2px;
+    padding: 0;
 }
 
-
+select option[selected] {
+    font-weight: bold;
+}
 
 
 .jumbotron {

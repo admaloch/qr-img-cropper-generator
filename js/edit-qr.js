@@ -1,19 +1,6 @@
 let qrUrl = 'https://www.floridamemory.com/'
 let qrImg;
 
-
-
-// listener for main settings range inputs
-const qrImage = document.getElementById('qr-image');
-const rangeInputs = document.querySelectorAll('.main-settings-range')
-rangeInputs.forEach(input => {
-    input.addEventListener('input', () => {
-        updateRangeSetting(input.id, input.value)
-        updateRangeText(input, input.value)
-
-    })
-})
-
 const updateRangeSetting = (id, value) => {
 
     if (id === 'qr-size') {
@@ -26,28 +13,41 @@ const updateRangeSetting = (id, value) => {
     }
 }
 
-function pxToCM(sizeInPX) {
-    const cmRes = sizeInPX * 2.54 / (96 * window.devicePixelRatio)
-    const roundedRes = Math.round(cmRes * 100) / 100;
-    return cmRes
-};
+// listener for main settings range inputs
+const qrImage = document.getElementById('qr-image');
+const rangeInputs = document.querySelectorAll('.main-settings-range')
+rangeInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        updateRangeSetting(input.id, input.value)
+        updateRangeText(input, input.value)
 
-function pxToInch(sizeInPX) {
-    const inchRes = (pxToCM(sizeInPX) * 0.393701)
-    const roundedRes = Math.round(inchRes * 100) / 100;
-    return roundedRes
-}
+    })
+})
+
+
+
+
 
 const updateRangeText = (item, value) => {
     const textValLocation = item.previousElementSibling.children[1];
+    const sizeType = document.querySelector('#size-type')
 
-    if (item.id === 'qr-size') {
-        let inchConversion = `${pxToInch(parseInt(value))}"`
-        textValLocation.innerText = inchConversion;
+    if (item.id === 'qr-size' && sizeType.value !== 'px') {
+        if (sizeType.value === 'inches') {
+            textValLocation.innerText = `${pxToInch(parseInt(value))}"`;
+        } else {
+            textValLocation.innerText = `${pxToCM(parseInt(value))}cm`;
+        }
     } else {
         textValLocation.innerText = `${parseInt(value)}px`;
     }
 }
+
+document.querySelector('#size-type').addEventListener('change', () => {
+    const sizeRange = document.querySelector('#qr-size');
+    const currSize = sizeRange.value;
+    updateRangeText(sizeRange, currSize);
+});
 
 const resetMainRangeBtns = document.querySelectorAll('.reset-main-item');
 resetMainRangeBtns.forEach(item => {
@@ -55,7 +55,8 @@ resetMainRangeBtns.forEach(item => {
 
         const input = item.closest('.main-range-input').children[1];
         input.value = input.defaultValue;
-        const defaultVal = `${input.defaultValue}px`;
+        const defaultVal = input.defaultValue;
+
         updateRangeSetting(input.id, defaultVal);
         updateRangeText(input, defaultVal);
     })
