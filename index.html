@@ -33,8 +33,8 @@
       <div class="qr-settings">
         <div id="settings-items">
           <h2>Qr Settings </h2>
-          <button class="active settings-btn light-blue-bg" id="main-settings-btn">Main</button>
-          <button class="settings-btn light-blue-bg" id="filter-settings-btn">Filters</button>
+          <button class="active settings-btn btn-option-style light-blue-bg" id="main-settings-btn">Main</button>
+          <button class="settings-btn btn-option-style light-blue-bg" id="filter-settings-btn">Filters</button>
 
           <i id="download-qr" data-toggle="tooltip" title="Download QR Code" class="fa-solid fa-download"></i>
 
@@ -43,11 +43,22 @@
 
 
         <div id="main-settings-section">
+
+          <div class="qr-style">
+            <label for="qr-style">QR Style:</label>
+            <div class="style-options">
+              <button id="mode-1" class="mode-btn btn-option-style active">Mode 1</button>
+              <button id="mode-2" class="mode-btn btn-option-style">Mode 2</button>
+            </div>
+          </div>
+
+
           <div class="qr-location">
             <label for="qr-url-input">QR Url:</label>
             <input type="text" id="qr-url-input" name="qr-url-input" required minlength="4" />
-            <i id="url-error-icon" data-toggle="tooltip" title="URL too long to generate qr code. Consider shortening or using a url shortener" class="fa-solid fa-exclamation-circle link-border"></i>
-
+            <i id="url-error-icon" data-toggle="tooltip"
+              title="URL too long to generate qr code. Consider shortening or using a url shortener"
+              class="fa-solid fa-exclamation-circle link-border"></i>
           </div>
 
 
@@ -59,13 +70,13 @@
                 <span>Size</span>
                 <i id="reset-size" data-toggle="tooltip" title="Reset Size"
                   class="fa-solid fa-arrows-rotate reset-main-item"></i>
-                  <select name="size-type" id="size-type">
-                    <option selected value="inches">Inches</option>
-                    <option value="cm">Cm</option>
-                    <option value="px">Px</option>
-                  </select>
+                <select name="size-type" id="size-type">
+                  <option  value="inches">Inches</option>
+                  <option value="cm">Cm</option>
+                  <option selected value="px">Px</option>
+                </select>
               </div>
-              <span></span>
+              <span>300px</span>
             </div>
             <input type="range" class="main-settings-range" id="qr-size" name="size" value="300" step="1" min="200"
               max="700" />
@@ -78,7 +89,7 @@
 
 
 
-          <div class="color-input">
+          <div class="color-input" id="qr-bg-color">
 
             <label for="Background Color">
               Background Color:
@@ -106,9 +117,8 @@
                   Border Color:
                 </label>
                 <input type="color" class="color_swatch custom-color-input" id="qr-border-input"
-                  title="Choose Border Color" value="#020100" colorpick-eyedropper-active="true">
-                <i data-toggle="tooltip" title="Match Background color" class="fa-solid fa-link link-background"></i>
-                <!-- <p class="hexVal" id="bg_hexVal">#ffffff</p> -->
+                  title="Choose Border Color" value="#ffffff" colorpick-eyedropper-active="true">
+                <i id="link-border-to-bg" data-toggle="tooltip" title="Match Background color" class="fa-solid fa-link link-background"></i>
               </div>
               <div class="border-style border-item">
                 <label for="border-style">Border Style:</label>
@@ -126,16 +136,16 @@
               </div>
 
               <div class="main-range-input border-item">
-                <div  class="range-input-text">
+                <div class="range-input-text">
                   <div>
                     <span>Border Size</span>
                     <i id="reset-border-size" data-toggle="tooltip" title="Reset border size"
                       class="fa-solid fa-arrows-rotate reset-main-item"></i>
                   </div>
-                  <span>10px</span>
+                  <span>5px</span>
                 </div>
-                <input type="range" class="main-settings-range" id="border-size-input" name="border-size" value="10"
-                  step="1" min="1" max="25" />
+                <input type="range" class="main-settings-range" id="border-size-input" name="border-size" value="5"
+                  step="1" min="0" max="25" />
               </div>
 
               <div class="main-range-input border-item">
@@ -145,9 +155,9 @@
                     <i id="reset-border-radius" data-toggle="tooltip" title="Reset border radius"
                       class="fa-solid fa-arrows-rotate reset-main-item"></i>
                   </div>
-                  <span>10px</span>
+                  <span>5px</span>
                 </div>
-                <input type="range" class="main-settings-range" id="border-radius-input" name="border-radius" value="10"
+                <input type="range" class="main-settings-range" id="border-radius-input" name="border-radius" value="5"
                   step="1" min="0" max="50" />
               </div>
 
@@ -157,10 +167,6 @@
                   <i class="fa-solid fa-arrows-rotate "></i>
                 </span>
               </div>
-
-
-
-
 
             </div>
           </div>
@@ -255,16 +261,7 @@
               max="360" />
           </div>
 
-          <div class="custom-filter-item">
-            <div class="filter-info">
-              <div>
-                <span>Blur</span>
-                <i data-toggle="tooltip" title="Reset Blur" class="fa-solid fa-arrows-rotate reset-filter-item"></i>
-              </div>
-              <span>0px</span>
-            </div>
-            <input type="range" class="filter-item-input" id="blur" name="blur" value="0" step="1" min="0" max="20" />
-          </div>
+
           <div>
             <span id="reset-all-filters" class="section-reset">
               <span>Reset Filter Settings</span>
@@ -403,7 +400,7 @@
 
       <!-- <h3 class="page-header">Demo:</h3> -->
       <div class="img-container">
-        <img id="image" src="./img/COM06379.JPG" alt="Picture">
+        <img id="image" src="./img/upload-img.png" alt="Picture">
       </div>
     </div>
     <!-- <label class=" btn-upload" for="inputImage" title="Upload image file">
@@ -430,6 +427,8 @@
   <script src="./js/edit-qr.js"></script>
   <!-- <script src="./js/pixels-edit.js"></script> -->
   <script src="./js/edit-filter.js"></script>
+  <script src="./js/photoEditer.js"></script>
+  <script src="./js/download.js"></script>
   <script src="./js/script.js"></script>
 
 

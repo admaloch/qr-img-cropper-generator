@@ -1,11 +1,20 @@
 let qrUrl = 'https://www.floridamemory.com/'
 let qrImg;
 
+const root = document.documentElement;
+
+
 const updateRangeSetting = (id, value) => {
 
     if (id === 'qr-size') {
         qrImage.style.width = `${value}px`;
         qrImage.style.height = `${value}px`;
+        const mode1Btn = document.querySelector('#mode-1')
+        if (mode1Btn.classList.contains('active')) {
+            console.log('it is active')
+            root.style.setProperty('--cropAmount', (value * -.071) + 'px');
+        }
+
     } else if (id === 'border-size-input') {
         qrImage.style.borderWidth = `${value}px`;
     } else {
@@ -23,9 +32,6 @@ rangeInputs.forEach(input => {
 
     })
 })
-
-
-
 
 
 const updateRangeText = (item, value) => {
@@ -160,7 +166,10 @@ const qrBorderColor = document.querySelector('#qr-border-input');
 qrBorderColor.addEventListener('input', (e) => {
     qrColor = e.target.value;
     qrImage.style.borderColor = e.target.value;
+    const color = this.value;
+    this.style.setProperty('--preview-color', color);
 });
+
 
 //border style select
 const borderStyleSelect = document.querySelector('#border-style');
@@ -220,6 +229,7 @@ const triggerToggle = (buttonId, value) => {
 
 const resetMainEditSection = () => {
     resetAllRangeItems()
+    document.querySelector('#mode-1').click()
     resetColorInputs('#qr-color-input');
     resetColorInputs('#qr-border-input');
     triggerEventFunc('#border-style', 'solid')
@@ -230,6 +240,6 @@ document.querySelector('#reset-main-settings').addEventListener('click', () => {
     resetMainEditSection()
 })
 
-resetMainEditSection()
+// resetMainEditSection()
 
 
