@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Qr Image Generator</title>
   <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -11,10 +13,8 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
   <script src="https://cdn.jsdelivr.net/gh/silvia-odwyer/pixels.js/dist/Pixels.js"></script>
-
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/qr.css">
-
 </head>
 
 <body>
@@ -24,7 +24,6 @@
       <i id="reset-all-qr" data-toggle="tooltip" title="Reset all Image settings" class="fa-solid fa-arrows-rotate"></i>
     </div>
     <div class="qr-section">
-
       <div id="qr-container">
         <div id="qr-image"></div>
         <div class="qr-bg-color"></div>
@@ -35,13 +34,8 @@
           <h2>Qr Settings </h2>
           <button class="active settings-btn btn-option-style light-blue-bg" id="main-settings-btn">Main</button>
           <button class="settings-btn btn-option-style light-blue-bg" id="filter-settings-btn">Filters</button>
-
           <i id="download-qr" data-toggle="tooltip" title="Download QR Code" class="fa-solid fa-download"></i>
-
-
         </div>
-
-
         <div id="main-settings-section">
 
           <div class="qr-style">
@@ -52,7 +46,6 @@
             </div>
           </div>
 
-
           <div class="qr-location">
             <label for="qr-url-input">QR Url:</label>
             <input type="text" id="qr-url-input" name="qr-url-input" required minlength="4" />
@@ -60,9 +53,6 @@
               title="URL too long to generate qr code. Consider shortening or using a url shortener"
               class="fa-solid fa-exclamation-circle link-border"></i>
           </div>
-
-
-
 
           <div class="main-range-input">
             <div id="size-input-text" class="range-input-text">
@@ -81,13 +71,6 @@
             <input type="range" class="main-settings-range" id="qr-size" name="size" value="300" step="1" min="200"
               max="700" />
           </div>
-
-
-
-
-
-
-
 
           <div class="color-input" id="qr-bg-color">
 
@@ -160,7 +143,6 @@
                 <input type="range" class="main-settings-range" id="border-radius-input" name="border-radius" value="5"
                   step="1" min="0" max="50" />
               </div>
-
               <div>
                 <span id="reset-main-settings" class="section-reset">
                   <span>Reset Main Settings</span>
@@ -170,7 +152,6 @@
 
             </div>
           </div>
-
         </div>
 
         <div id="filter-settings-section">
@@ -248,7 +229,6 @@
             <input type="range" class="filter-item-input" id="sepia" name="sepia" value="0" step="1" min="0"
               max="100" />
           </div>
-
           <div class="custom-filter-item">
             <div class="filter-info">
               <div>
@@ -260,36 +240,27 @@
             <input type="range" class="filter-item-input" id="hue-rotate" name="hue-rotate" value="0" step="1" min="0"
               max="360" />
           </div>
-
-
           <div>
             <span id="reset-all-filters" class="section-reset">
               <span>Reset Filter Settings</span>
               <i class="fa-solid fa-arrows-rotate "></i>
             </span>
           </div>
-
-
         </div>
-
-
-
       </div>
     </div>
-
-    <!-- <div>
-      <button id="trigger-filter-preset">Click me!!!!</button>
-      <select name="pixel-js-select" id="pixel-js-select"></select>
-    </div> -->
-
-    <div class="main-img col-md-9">
+    <div class="main-img ">
       <div class="img-section-title">
         <h2 class="text-center">Image Settings</h2>
+        <label type="button" class="settings-icon upload-photo-icon" for="inputImage" title="Upload image file">
+          <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+          <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Upload New Image">
+            <i class="fa-solid fa-upload"></i>
+          </span>
+        </label>
       </div>
       <div class="img-settings">
         <div class="docs-buttons">
-
-
           <button type="button" class="settings-icon" data-method="zoom" data-option="-0.1" title="Zoom Out">
             <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Zoom Out">
               <i class="fa-solid fa-circle-minus"></i> </span>
@@ -299,9 +270,6 @@
               <i class="fa-solid fa-circle-plus"></i>
             </span>
           </button>
-
-
-
           <button type="button" class="settings-icon" data-method="move" data-option="10" data-second-option="0"
             title="Move Left">
             <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Move left">
@@ -326,9 +294,6 @@
               <i class="fa-solid fa-hand-point-down"></i>
             </span>
           </button>
-
-
-
           <button type="button" class="settings-icon" data-method="rotate" data-option="-45" title="Rotate Left">
             <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Rotate Left">
               <i class="fa-solid fa-arrow-rotate-left"></i> </span>
@@ -337,9 +302,6 @@
             <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Rotate Right">
               <i class="fa-solid fa-arrow-rotate-right"></i> </span>
           </button>
-
-
-
           <button type="button" class="settings-icon" data-method="scaleX" data-option="-1" title="Flip Horizontal">
             <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Horizontal Flip">
               <i class="fa-solid fa-left-right"></i> </span>
@@ -348,71 +310,26 @@
             <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Vertical Flip">
               <i class="fa-solid fa-up-down"></i> </span>
           </button>
-
-
-
-
-
-
-
           <button type="button" class="settings-icon" id="reset-crop-btn" data-method="reset" title="Reset">
             <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Reset Crop">
               <i class="fa-solid fa-arrows-rotate"></i> </span>
           </button>
-
-
-          <label type="button" class="settings-icon upload-photo-icon" for="inputImage" title="Upload image file">
-            <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
-            <span class="docs-tooltip settings-icon-container" data-toggle="tooltip" title="Upload New Image">
-              <i class="fa-solid fa-upload"></i>
-            </span>
-          </label>
-
-
-          <!-- <label class=" btn-upload" for="inputImage" title="Upload image file">
-            <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
-
-            <span>Upload New Image</span>
-            <span class="fa fa-icon-style fa-upload upload-icon"></span>
-
-          </label> -->
-
-
-
-
-
           <div class=" -crop hide-crop-btn">
             <button type="button" class="settings-icon" data-method="getCroppedCanvas">
               <span id="gen-cropped-img" class="docs-tooltip settings-icon-container">
                 Get Cropped Canvas
               </span>
             </button>
-
           </div>
-
-
-
-          <!-- Show the cropped image in modal -->
-
         </div><!-- /.docs-buttons -->
 
       </div>
 
-      <!-- <h3 class="page-header">Demo:</h3> -->
       <div class="img-container">
-        <img id="image" src="./img/upload-img.png" alt="Picture">
+        <img class="img-responsive" id="image" src="./img/upload-img.png" alt="Picture">
       </div>
     </div>
-    <!-- <label class=" btn-upload" for="inputImage" title="Upload image file">
-      <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
-
-      <span>Upload New Image</span>
-      <span class="fa fa-icon-style fa-upload upload-icon"></span>
-
-    </label> -->
   </div>
-
-
 
   <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
@@ -421,9 +338,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-
   <script src="./js/utility.js"></script>
-
   <script src="./js/edit-qr.js"></script>
   <!-- <script src="./js/pixels-edit.js"></script> -->
   <script src="./js/edit-filter.js"></script>

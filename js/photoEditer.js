@@ -1,8 +1,5 @@
-
 $(function () {
-
 	'use strict';
-
 	let console = window.console || { log: function () { } };
 	let $image = $('#image');
 	let $download = $('#download');
@@ -62,8 +59,6 @@ $(function () {
 		'zoom.cropper': function (e) {
 			// console.log(e.type, e.ratio);
 		}
-
-
 	}).cropper(options);
 
 	// Buttons
@@ -76,21 +71,16 @@ $(function () {
 		$('button[data-method="scale"]').prop('disabled', true);
 	}
 
-
-
 	// Options
 	$('.docs-toggles').on('change', 'input', function () {
 		let $this = $(this);
-
 		let name = $this.attr('name');
 		let type = $this.prop('type');
 		let cropBoxData;
 		let canvasData;
-
 		if (!$image.data('cropper')) {
 			return;
 		}
-
 		if (type === 'checkbox') {
 			options[name] = $this.prop('checked');
 			cropBoxData = $image.cropper('getCropBoxData');
@@ -103,17 +93,8 @@ $(function () {
 		} else if (type === 'radio') {
 			options[name] = $this.val();
 		}
-
 		$image.cropper('destroy').cropper(options);
-
-
-
-
-
-
-
 	});
-
 
 	// Methods
 	$('.docs-buttons').on('click', '[data-method]', function () {
@@ -121,17 +102,13 @@ $(function () {
 		let data = $this.data();
 		let $target;
 		let result;
-
 		if ($this.prop('disabled') || $this.hasClass('disabled')) {
 			return;
 		}
-
 		if ($image.data('cropper') && data.method) {
 			data = $.extend({}, data); // Clone a new one
-
 			if (typeof data.target !== 'undefined') {
 				$target = $(data.target);
-
 				if (typeof data.option === 'undefined') {
 					try {
 						data.option = JSON.parse($target.val());
@@ -140,43 +117,29 @@ $(function () {
 					}
 				}
 			}
-
 			if (data.method === 'rotate') {
 				$image.cropper('clear');
 			}
-
 			result = $image.cropper(data.method, data.option, data.secondOption);
-
-
-
 			if (data.method === 'rotate') {
 				$image.cropper('crop');
 			}
-
 			switch (data.method) {
 				case 'scaleX':
 				case 'scaleY':
 					$(this).data('option', -data.option);
 					break;
-
 				case 'getCroppedCanvas':
 					if (result) {
-
-
-
-
 						if (!$download.hasClass('disabled')) {
 							$download.attr('href', result.toDataURL('image/jpeg'));
 							qrImg = result.toDataURL('image/jpeg')
 
 							makeQArt(qrUrl, qrImg)
 						}
-
 					}
-
 					break;
 			}
-
 			if ($.isPlainObject(result) && $target) {
 				try {
 					$target.val(JSON.stringify(result));
@@ -184,20 +147,14 @@ $(function () {
 					console.log(e.message);
 				}
 			}
-
 		}
 	});
 
-
-
-
 	// Keyboard
 	$(document.body).on('keydown', function (e) {
-
 		if (!$image.data('cropper') || this.scrollTop > 300) {
 			return;
 		}
-
 		switch (e.which) {
 			case 37:
 				e.preventDefault();
@@ -219,9 +176,7 @@ $(function () {
 				$image.cropper('move', 0, 1);
 				break;
 		}
-
 	});
-
 
 	// Import image
 	let $inputImage = $('#inputImage');
@@ -239,7 +194,6 @@ $(function () {
 
 			if (files && files.length) {
 				file = files[0];
-
 				if (/^image\/\w+$/.test(file.type)) {
 					blobURL = URL.createObjectURL(file);
 					$image.one('built.cropper', function () {
@@ -256,7 +210,4 @@ $(function () {
 	} else {
 		$inputImage.prop('disabled', true).parent().addClass('disabled');
 	}
-
-
-
 });

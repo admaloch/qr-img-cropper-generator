@@ -25,7 +25,6 @@ const genCurrFilterCssVal = (id) => {
     return textValType;
 }
 
-
 //listener for css filter input changes
 filterInputs.forEach(filterInput => {
     filterInput.addEventListener('input', () => {
@@ -47,8 +46,6 @@ const updateFilterObj = () => {
     }
     return filterValStr;
 }
-
-
 
 //listener when user clicks to reset individual
 const resetFilterItems = document.querySelectorAll('.reset-filter-item')
@@ -75,6 +72,3 @@ const resetAllFilters = document.querySelector('#reset-all-filters')
 resetAllFilters.addEventListener('click', () => {
     resetAllQrFilters()
 })
-
-
-

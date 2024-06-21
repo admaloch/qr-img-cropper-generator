@@ -1,10 +1,8 @@
 let qrUrl = 'https://www.floridamemory.com/'
 let qrImg;
 
-const root = document.documentElement;
-
-
 const updateRangeSetting = (id, value) => {
+    const root = document.documentElement;
 
     if (id === 'qr-size') {
         qrImage.style.width = `${value}px`;
@@ -14,7 +12,6 @@ const updateRangeSetting = (id, value) => {
             console.log('it is active')
             root.style.setProperty('--cropAmount', (value * -.071) + 'px');
         }
-
     } else if (id === 'border-size-input') {
         qrImage.style.borderWidth = `${value}px`;
     } else {
@@ -29,10 +26,8 @@ rangeInputs.forEach(input => {
     input.addEventListener('input', () => {
         updateRangeSetting(input.id, input.value)
         updateRangeText(input, input.value)
-
     })
 })
-
 
 const updateRangeText = (item, value) => {
     const textValLocation = item.previousElementSibling.children[1];
@@ -58,65 +53,13 @@ document.querySelector('#size-type').addEventListener('change', () => {
 const resetMainRangeBtns = document.querySelectorAll('.reset-main-item');
 resetMainRangeBtns.forEach(item => {
     item.addEventListener('click', () => {
-
         const input = item.closest('.main-range-input').children[1];
         input.value = input.defaultValue;
         const defaultVal = input.defaultValue;
-
         updateRangeSetting(input.id, defaultVal);
         updateRangeText(input, defaultVal);
     })
 })
-
-function formatURL(input) {
-    let formattedURL = input.trim(); // Trim whitespace
-
-    // if (input.length > 119) {
-    //     // console.log('input is long', input.length)
-    //     formattedURL = formattedURL.slice(0, 119)
-    // }
-
-    if (!formattedURL.startsWith("http://") && !formattedURL.startsWith("https://")) {
-        formattedURL = "https://" + formattedURL; // Prepend default protocol if missing
-    }
-
-
-    return formattedURL;
-}
-
-const API_KEY = 'sk_78679d2b538f409992feb3a7a16e15be'
-
-async function shortenURL(url) {
-    const inputBody = JSON.stringify({
-        url: url,
-        expiry: '525600m'
-    });
-
-    const headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'x-api-key': API_KEY
-    };
-
-    try {
-        const response = await fetch('https://api.manyapis.com/v1-create-short-url', {
-            method: 'POST',
-            body: inputBody,
-            headers: headers
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            return data.shortUrl;
-        } else {
-            throw new Error(data.error);
-        }
-    } catch (error) {
-        console.error('Error:', error.message);
-        return null;
-    }
-}
 
 // listener for url input
 const qrUrlInput = document.querySelector('#qr-url-input');
@@ -133,9 +76,7 @@ qrUrlInput.addEventListener('input', async (e) => {
     } else {
         errorIcon.style.display = 'inline'
         qrUrlInput.classList.add('error-shadow')
-
     }
-
 });
 
 //qr color input
@@ -170,7 +111,6 @@ qrBorderColor.addEventListener('input', (e) => {
     this.style.setProperty('--preview-color', color);
 });
 
-
 //border style select
 const borderStyleSelect = document.querySelector('#border-style');
 borderStyleSelect.addEventListener('change', (e) => {
@@ -200,8 +140,6 @@ const resetAllRangeItems = () => {
     })
 }
 
-
-
 const resetColorInputs = (itemId) => {
     const colorInputItem = document.querySelector(itemId);
     colorInputItem.value = colorInputItem.defaultValue;
@@ -225,8 +163,6 @@ const triggerToggle = (buttonId, value) => {
     borderItems.forEach(item => item.classList.remove('disable'))
 }
 
-
-
 const resetMainEditSection = () => {
     resetAllRangeItems()
     document.querySelector('#mode-1').click()
@@ -239,7 +175,3 @@ const resetMainEditSection = () => {
 document.querySelector('#reset-main-settings').addEventListener('click', () => {
     resetMainEditSection()
 })
-
-// resetMainEditSection()
-
-
