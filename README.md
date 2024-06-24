@@ -1,7 +1,7 @@
 # qr-img-generator
 
 <h2>About this Project:</h2>
-This is an image-based QR-code generator, built using QART and Cropper.js. It allows a user to upload an image,
+This is an image-based QR-code generator, built for Florida Memory using QART and Cropper.js. It allows a user to upload an image,
 crop, generate a qr-code, then edit the code.
 <h2>Reason:</h2>
 <p>
@@ -12,7 +12,7 @@ href="https://github.com/kciter/qart.js?tab=readme-ov-file">QART</a>
 , which is a client-side js plugin that turns images into qr codes.
 We decided to enhance and develop it into a
 more user-friendly platform that simplifies the process of generating,
-editing, and downloading codes on the fly. In addition, we used <a href="">Cropper.js</a> to crop the images.
+editing, and downloading codes on the fly. In addition, we used <a href="https://github.com/fengyuanchen/cropperjs">Cropper.js</a> to crop the images.
 </p>
 
 <h2>Challenges:</h2>
