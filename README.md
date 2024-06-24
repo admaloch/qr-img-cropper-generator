@@ -17,3 +17,6 @@ editing, and downloading codes on the fly. In addition, we used <a href="https:/
 
 <h2>Challenges:</h2>
 <p>Image based qr-codes don't always work as well as normal codes, so it took a lot of fine tuning to get the codes to work properly.</p>
+
+<h2>Current Status:</h2>
+<p>This project was built as an internal tool to be used by department staff. It is currently complete.</p>
